@@ -6,12 +6,12 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/jkbarathkumar/mock-test'
+                git branch: 'main', url: 'https://github.com/ssethumadav/test1.git'
             }
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t barathkumar29/helloworld-python .'
+                sh 'docker build -t ssethumadav/helloworld-python .'
             }
         }
         stage('Push to DockerHub') {
@@ -19,7 +19,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                     echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                    docker push barathkumar29/helloworld-python
+                    docker push ssethumadav/helloworld-python
                     '''
                 }
             }
